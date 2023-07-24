@@ -12,12 +12,18 @@ public class NewEntryWindow extends PageBase {
         PageFactory.initElements(driver, this);
     }
 
-    public NewEntryWindow addNewEntry(int day, String month, String year, String temperature,
+    //
+    //*** Метод несовершенный, но как идея возможно будет понятен.
+    //
+    public void addNewEntry(String day, String month, String year, String temperature,
                                       String weight, String pressure_1, String pressure_2,
                                       String sugarLevel, String pulse, String mood, String alcoholLevel,
                                       String ambivalence, String healthStatus, String skinCondition) throws InterruptedException {
-        calendarInput.click();
-        setDate(day, month, year);
+
+        if (!day.equals("") || !month.equals("") || !year.equals("")) {
+            calendarInput.click();
+            setDate(day, month, year);
+        }
         temperatureInput.sendKeys(temperature);
         weightInput.sendKeys(weight);
         pressureInput_1.sendKeys(pressure_1);
@@ -30,10 +36,9 @@ public class NewEntryWindow extends PageBase {
         healthStatusInput.sendKeys(healthStatus);
         skinConditionInput.sendKeys(skinCondition);
         submitButton.click();
-        return this;
     }
 
-    public void setDate(int day, String month, String year) throws InterruptedException {
+    public void setDate(String day, String month, String year) throws InterruptedException {
         String monthValue = getMonthValueText();
         String yearValue = getYearValueText();
 
@@ -54,8 +59,8 @@ public class NewEntryWindow extends PageBase {
         return yearValue.getText();
     }
 
-    public void calendar_selectDay(int day) {
-        driver.findElement(By.xpath(String.format("(//a[contains(@class,'ui-state-default')])[%d]", day))).click();
+    public void calendar_selectDay(String day) {
+        driver.findElement(By.xpath(String.format("(//a[contains(@class,'ui-state-default')])[%s]", Integer.parseInt(day)))).click();
     }
 
     @FindBy(xpath = "//span[contains(@class,'ui-datepicker-month')]")

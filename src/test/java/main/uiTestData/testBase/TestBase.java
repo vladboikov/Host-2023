@@ -1,5 +1,4 @@
 package main.uiTestData.testBase;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -41,12 +40,11 @@ public class TestBase {
             driver.switchTo().window(winHandle);
         }
         PageBase.setDriver(driver, wait);
-
     }
 
     @AfterMethod
     public void tearDown() {
-//        driver.quit();
-//        destroyChrome();
+        driver.quit();
+        destroyChrome();
     }
 }

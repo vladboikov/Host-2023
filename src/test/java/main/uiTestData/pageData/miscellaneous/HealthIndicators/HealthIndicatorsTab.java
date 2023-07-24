@@ -5,6 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.List;
 
 public class HealthIndicatorsTab extends PageBase {
@@ -13,10 +17,11 @@ public class HealthIndicatorsTab extends PageBase {
         PageFactory.initElements(driver, this);
     }
 
-    public void selectIndicatorFilterOption(String option) throws InterruptedException {
+    public void selectIndicatorFilterOption(String option) {
         driver.findElement(By.xpath(String.format("//li[@aria-label='%s']", option))).click();
-        Thread.sleep(1000);
-        //Пока не разобрался, почему не работает явное ожидание, поставил sleep
+        new WebDriverWait
+                (driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated
+                ((By.xpath(String.format("//div[@class='col indicator']/div[text()='%s']", option)))));
     }
 
     public HealthIndicatorsTab indicatorFilterMenuClick() {
@@ -42,4 +47,10 @@ public class HealthIndicatorsTab extends PageBase {
 
     @FindBy(xpath = "//div[@class='col indicator']/div[contains(@class,'break-word')]")
     public WebElement indicatorColumn;
+
+    @FindBy(xpath = "(//div[@class='col val']/div[contains(@class,'break-word')])[1]")
+    public WebElement firstValueColumn;
+
+    @FindBy(xpath = "//i[contains(@class,'settings')]/ancestor::a")
+    public WebElement settingsButton;
 }
