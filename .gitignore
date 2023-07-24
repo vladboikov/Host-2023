@@ -1,8 +1,0 @@
-build
-/classes
-.idea
-*.iml
-out
-.project
-.classpath
-.settings/
