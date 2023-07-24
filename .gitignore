@@ -1,0 +1,11 @@
+/allure-results/
+pom.xml
+build
+/classes
+.idea
+*.iml
+out
+target/
+.project
+.classpath
+.settings/
