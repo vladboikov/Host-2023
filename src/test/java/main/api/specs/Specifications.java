@@ -15,15 +15,10 @@ public class Specifications {
                 .setContentType(ContentType.JSON)
                 .addHeader("cookie", "connect.sid=s%3AX-L4YcNHLar2QuGCSohS9STLfycUnmnJ.x765q4ArVEZkzhB60Fs64VlWp4TbvGRgB3EysJ1NQEE")
                 .build();
+
     }
 
     public static ResponseSpecification responseSpec200() {
-        return new ResponseSpecBuilder()
-                .expectStatusCode(200)
-                .build();
-    }
-
-    public static ResponseSpecification addHeaders() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .build();

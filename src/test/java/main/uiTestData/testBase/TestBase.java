@@ -1,4 +1,6 @@
 package main.uiTestData.testBase;
+import main.uiTestData.utils.owner.FrameworkConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +16,7 @@ public class TestBase {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     public static String initialWindow;
+    public static FrameworkConfig config = ConfigFactory.create(FrameworkConfig.class);
 
     @BeforeMethod
     public void setUp() {
@@ -33,13 +36,14 @@ public class TestBase {
 
         options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
         initialWindow = driver.getWindowHandle();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(config.timeout(), TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(config.timeout()));
 
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
         PageBase.setDriver(driver, wait);
+
     }
 
     @AfterMethod

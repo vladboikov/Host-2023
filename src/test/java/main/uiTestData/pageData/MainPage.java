@@ -1,6 +1,7 @@
 package main.uiTestData.pageData;
 
-import main.uiTestData.pageData.miscellaneous.HealthIndicators.HealthIndicatorsTab;
+import main.uiTestData.pageData.userAccount.miscellaneousTab.HealthIndicators.HealthIndicatorsTab;
+import main.uiTestData.pageData.userAccount.UserAccount;
 import main.uiTestData.testBase.PageBase;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,7 +12,7 @@ public class MainPage extends PageBase {
     }
 
     public void open() {
-        driver.navigate().to("https://pp86.hostco.ru/");
+        driver.navigate().to(config.url());
     }
 
     public void goTo_Auth() {
